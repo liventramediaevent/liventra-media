@@ -1,1 +1,35 @@
-export default function LivePlayer({isLive,liveVideoId}:{isLive:boolean;liveVideoId:string|null}){return <section id="live" className="container-main py-6"><div className="mb-5 flex items-center justify-between"><h2 className="section-title">Live Stream</h2></div><div className="glass-card overflow-hidden rounded-3xl p-4">{isLive&&liveVideoId?<iframe className="video-frame" src={`https://www.youtube.com/embed/${liveVideoId}?autoplay=1&rel=0`} title="YouTube Live Stream" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen/>:<div className="flex aspect-video items-center justify-center rounded-2xl border border-dashed border-white/10 bg-black/30 p-6 text-center"><div className="max-w-xl"><h3 className="text-2xl font-bold">No livestream is active</h3></div></div>}</div></section>}
+export default function LivePlayer({
+  isLive,
+  liveVideoId,
+}: {
+  isLive: boolean;
+  liveVideoId: string | null;
+}) {
+  return (
+    <section id="live" className="container-main py-6">
+      <div className="mb-5 flex items-center justify-between">
+        <h2 className="section-title">
+          {isLive ? "Live Stream" : "Featured Video"}
+        </h2>
+      </div>
+
+      <div className="glass-card overflow-hidden rounded-3xl p-4">
+        {liveVideoId ? (
+          <iframe
+            className="video-frame"
+            src={`https://www.youtube.com/embed/${liveVideoId}?autoplay=1&rel=0`}
+            title={isLive ? "YouTube Live Stream" : "YouTube Featured Video"}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        ) : (
+          <div className="flex aspect-video items-center justify-center rounded-2xl border border-dashed border-white/10 bg-black/30 p-6 text-center">
+            <div className="max-w-xl">
+              <h3 className="text-2xl font-bold">No video available</h3>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
