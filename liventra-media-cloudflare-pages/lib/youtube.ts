@@ -7,9 +7,10 @@ export type YouTubeVideo = {
 };
 
 export type YouTubeLiveData = {
-  isLive: boolean;
-  liveVideoId: string | null;
-  liveTitle: string | null;
+  isLive: boolean;                 // only true when channel is actually live
+  liveVideoId: string | null;      // actual live video id only
+  liveTitle: string | null;        // live title only when actually live
+  displayVideoId: string | null;   // what to embed on the page
   recentVideos: YouTubeVideo[];
   channelTitle: string;
 };
@@ -18,12 +19,8 @@ const API_BASE = "https://www.googleapis.com/youtube/v3";
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY!;
 const CHANNEL_ID = process.env.YOUTUBE_CHANNEL_ID!;
 
-/**
- * Fallback video to show when no live stream is currently active
- * Replace this later if you want another default video.
- */
+// fallback video when not live
 const FALLBACK_VIDEO_ID = "1JUbVBLF7hM";
-const FALLBACK_VIDEO_TITLE = "Featured Video";
 
 async function fetchJson(url: string) {
   const res = await fetch(url, { next: { revalidate: 60 } });
@@ -59,14 +56,15 @@ export async function getCurrentLiveStream() {
       isLive: true,
       liveVideoId: item.id.videoId as string,
       liveTitle: item.snippet?.title || "Live Now",
+      displayVideoId: item.id.videoId as string,
     };
   }
 
-  // No active live stream found → use fallback video
   return {
     isLive: false,
-    liveVideoId: FALLBACK_VIDEO_ID,
-    liveTitle: FALLBACK_VIDEO_TITLE,
+    liveVideoId: null,
+    liveTitle: null,
+    displayVideoId: FALLBACK_VIDEO_ID,
   };
 }
 
@@ -99,6 +97,7 @@ export async function getYouTubeData(): Promise<YouTubeLiveData> {
     isLive: liveInfo.isLive,
     liveVideoId: liveInfo.liveVideoId,
     liveTitle: liveInfo.liveTitle,
+    displayVideoId: liveInfo.displayVideoId,
     recentVideos,
     channelTitle: channelInfo.title,
   };
