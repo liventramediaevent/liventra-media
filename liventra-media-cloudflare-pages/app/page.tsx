@@ -14,6 +14,7 @@ export default async function HomePage() {
   return (
     <main>
       <Header />
+
       <Hero
         isLive={data.isLive}
         channelTitle={data.channelTitle}
