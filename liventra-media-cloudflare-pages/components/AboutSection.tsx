@@ -1,0 +1,1 @@
+export default function AboutSection(){return <section id="about" className="container-main py-6 pb-16"><div className="glass-card rounded-3xl p-6"><h2 className="section-title">About LIVENTRA MEDIA</h2><p className="mt-4 max-w-3xl text-zinc-300 leading-7">LIVENTRA MEDIA is a YouTube-powered streaming hub designed to keep your audience connected in one place.</p></div></section>}

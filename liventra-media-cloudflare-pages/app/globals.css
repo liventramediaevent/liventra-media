@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root { --bg:#0f0f0f; --text:#fff; }
+body { background: radial-gradient(circle at top left, rgba(255,0,0,.12), transparent 25%), linear-gradient(to bottom, #0f0f0f, #090909); color: var(--text); font-family: Arial, Helvetica, sans-serif; min-height: 100vh; }
+.container-main { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+.glass-card { background: rgba(24,24,24,.92); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 10px 30px rgba(0,0,0,.35), 0 0 0 1px rgba(255,0,0,.04) inset; backdrop-filter: blur(10px); }
+.section-title { @apply text-2xl sm:text-3xl font-bold tracking-tight; }
+.red-glow { box-shadow: 0 0 0 1px rgba(255,0,0,.15), 0 0 30px rgba(255,0,0,.12); }
+.live-pulse { position: relative; }
+.live-pulse::before { content:""; position:absolute; left:-.4rem; top:50%; transform:translateY(-50%); width:.55rem; height:.55rem; border-radius:9999px; background:#ff0000; box-shadow:0 0 12px rgba(255,0,0,.7); }
+.video-frame { aspect-ratio: 16 / 9; width: 100%; border: 0; border-radius: 1rem; }

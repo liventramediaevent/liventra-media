@@ -1,0 +1,9 @@
+name = "liventra-media"
+compatibility_date = "2026-06-23"
+compatibility_flags = ["nodejs_compat"]
+
+[build]
+command = "npm run build"
+
+[vars]
+YOUTUBE_CHANNEL_ID = "UCLeBqaOXvbonWYYhr9MdHTA"
